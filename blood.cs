@@ -74,6 +74,7 @@ function createBloodDripProjectile(%position, %size, %paint) {
 	};
 
 	MissionCleanup.add(%obj);
+	//GameRoundCleanup.add(%obj);
 
 	if (%size !$= "") {
 		%obj.setScale(%size SPC %size SPC %size);

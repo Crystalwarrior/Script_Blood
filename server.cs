@@ -52,6 +52,8 @@ function Player::setBloody(%this, %type, %dir, %bool, %client)
 			%this.bloody["chest_back"] = %bool;
 			%this.bloody["chest_lside"] = %bool;
 			%this.bloody["chest_rside"] = %bool;
+			if(!%bool)
+				%this.bloodyFootprints = 0;
 	}
 	if (isObject(%client))
 	{
