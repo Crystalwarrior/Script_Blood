@@ -15,6 +15,27 @@ exec("./damage.cs");
 exec("./support.cs");
 exec("./blood.cs");
 
+//we need the Push_Broom add-on for this, so force it to load
+%error = ForceRequiredAddOn("Weapon_Push_Broom");
+
+if(%error == $Error::AddOn_Disabled)
+{
+	//A bit of a hack:
+	//  we just forced the Push_Broom to load, but the user had it disabled
+	//  so lets make it so they can't select it
+	PushBroomItem.uiName = "";
+}
+
+if(%error == $Error::AddOn_NotFound)
+{
+	//we don't have the Push_Broom, so we're screwed
+	error("ERROR: Script_Blood - required add-on Weapon_Push_Broom not found, mop won't exist :(");
+}
+else
+{
+	exec("./mop.cs");
+}
+
 //Blood event
 registerOutputEvent(Player, setBloody, "list ALL 0 chest 1 left_hand 2 right_hand 3 left_shoe 4 right_shoe 5" TAB "list ALL 0 front 1 back 2" TAB "bool 0", 1);
 function Player::setBloody(%this, %type, %dir, %bool, %client)
