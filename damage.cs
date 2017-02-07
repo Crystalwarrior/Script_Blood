@@ -11,6 +11,9 @@ package DSBloodPackage {
 		if (getSimTime() - %obj.spawnTime < $Game::PlayerInvulnerabilityTime)
 			return Parent::damage(%this, %obj, %src, %pos, %damage, %type);
 
+		if (%src == %obj && %type != $DamageType::Fall && %type != $DamageType::Impact)
+			return Parent::damage(%this, %obj, %src, %pos, %damage, %type);
+
 		if (%damage == 0)
 			return;
 
